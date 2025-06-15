@@ -3,6 +3,7 @@ from discord.ext import commands
 import asyncio
 import colorama
 from colorama import Fore
+import os
 
 intents = discord.Intents.default()
 intents.members = True
@@ -12,17 +13,18 @@ colorama.init()
 
 bot = commands.Bot(command_prefix="-", intents=intents)
 
-token = "YOUR_BOT_TOKEN_HERE"  # ← Replace this with your real token
+token = os.getenv("TOKEN")  # Use Render environment variable
 
 @bot.event
 async def on_ready():
     print(f"""{Fore.RED}
-███████     ████████       ████████████   {Fore.CYAN}  ████████████    {Fore.CYAN}    ████████████      {Fore.RED} ██          ██
-██    ██       ██          ██               ██                  ██                 ██          ██
-██    ██       ██          ██               ██                  ██                 ██          ██
-██████       {Fore.RED}  ██          ██      █████    ██      █████     {Fore.RED}  █████████        {Fore.CYAN}  ██████████████
+███████     ████████       ████████████       {Fore.CYAN}████████████    ████████████      {Fore.RED}██          ██
+██    ██      ██          ██               ██                  ██                 ██          ██
+██    ██      ██          ██               ██                  ██                 ██          ██
+██████        ██          ██      █████    ██      █████     █████████        {Fore.CYAN}██████████████
 ██             ██          ██         ██    ██         ██       ██                 ██          ██
-██          ████████       ████████████     ███████████        {Fore.CYAN} ████████████       ██         {Fore.RED} ██""")
+██          ████████       ████████████     ███████████        {Fore.CYAN}████████████       {Fore.RED}██         ██
+""")
 
 @bot.command()
 async def dm(ctx):
@@ -36,7 +38,6 @@ async def dm(ctx):
             print(f"✅ Sent to {member}")
             await asyncio.sleep(1)
         except:
-            print(f"❌ Could
-n't send to {member}")
+            print(f"❌ Couldn't send to {member}")
 
 bot.run(token)
